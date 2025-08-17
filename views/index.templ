@@ -1,0 +1,10 @@
+package views
+
+type IndexViewModel struct {
+}
+
+templ Index(vm IndexViewModel) {
+	@RootWrapper(GetRootViewModel("Tournament Winner")) {
+		<h1>Welcome</h1>
+	}
+}

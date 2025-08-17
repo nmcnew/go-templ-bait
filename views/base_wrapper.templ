@@ -1,0 +1,54 @@
+package views
+
+import "github.com/nmcnew/tournament-winner/models"
+
+type RootViewModel struct {
+	Title      string
+	UserClaims models.Claims
+}
+
+func GetRootViewModel(title string) RootViewModel {
+	return RootViewModel{
+		Title: title,
+	}
+}
+
+templ RootWrapper(vm RootViewModel) {
+	<!DOCTYPE html>
+	<html>
+		<head>
+			<title>{ vm.Title }</title>
+			<link rel="stylesheet" href="/static/css/reset.css"/>
+			<link rel="stylesheet" href="/static/css/index.css"/>
+			<script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.6/dist/htmx.min.js"></script>
+			<script async src="/static/js/index.js"></script>
+		</head>
+		<body>
+			<header>
+				@NavBar()
+			</header>
+			<div id="content">
+				{ children... }
+			</div>
+			<footer>
+				to be filled in
+			</footer>
+		</body>
+	</html>
+}
+
+templ NavBar() {
+	<nav id="main-nav">
+		<div><a href="/">Home</a></div>
+		<div><a href="/">Tournaments</a></div>
+		<div><a href="/">Communities</a></div>
+	</nav>
+}
+
+templ UserProfileButton(c models.Claims) {
+	<btn href="#" hx-on:click="userProfileDropdown.hidden = !userProfileDropdown.hidden">
+		<div id="userProfileDropdown" hidden>
+			<!--TODO: Create a bunch of sensible things to put in a profile dropdown-->
+		</div>
+	</btn>
+}
